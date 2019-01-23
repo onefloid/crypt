@@ -1,0 +1,109 @@
+# NAME
+
+Crypt::File - provide functions for symmetric decryption and encryption of file
+
+# VERSION
+
+version 1.01
+
+# Crypt:File.pm
+
+# BESCHREIBUNG
+
+Modul stellt Funktionen für die symetrische Ver- und Entschlüsselung von Dateien
+bereit und generiert/validiert einen MAC für die Authenzität- und Integritätssicherung.
+Das Chifrat und die MAC werden als neue Dateien mit entsprechender Endung in dem Ordner
+des Plaintext Files abgelegt.
+
+Beispiel: Im Ordner Ordner01 liegt die Datei plaintext.txt
+
+Nach der Verschlüsselung liegen in dem Ordner
+\- plaintext.txt
+\- plaintext.txt.enc
+\- plaintext.txt.hmac
+
+Nach erneuter Entschlüsselung kommt die Datei: plaintext.txt.dec hinzu oder durch
+die Option only\_return\_string => 1 erhält man Plaintext als string.
+
+Die Verschlüsselung basiert auf dem CPAN Modul CryptX.
+
+Es werden folgende kryptografische Verfahren  genutzt:
+ - Symetrischer Cipher: AES,
+ - MAC: HMAC
+ - Kryptografische Hash Funktion zur Erzeugung der passenden Schlüssellänge: SHA256
+
+Bei nicht zulässigen Parametern oder I/O Exceptions gibt es ein die/croak.
+
+# ANWENDUNG
+
+# CHANGES
+
+- 07.12.2018 FLS:   Modul v1.0
+
+# METHODEN
+
+Optionale Parameter
+\- hmac\_key: Schlüssel zur Erzeugung des HMAC, sonst wird Default Schlüssel verwendet
+\- only\_return\_string: 1 nur zulässig bei decryption
+\- cipher: AES
+
+## get\_encrypted\_file\_content
+
+Convenience Funktion zur Entschlüsselung 
+
+Obligatorische Übergabeparameter:
+\- file: Datei die verschlüsselt werden soll
+\- key: Schlüssel für symetrischen Cipher
+\- iv: Initialiesierungvektor
+
+Optionale Parameter:
+\- hmac\_key: Schlüssel zur Erzeugung des HMAC, sonst wird Default Schlüssel verwendet
+\- cipher: AES
+
+## crypt\_file
+
+- Beschreibung
+
+    Verschlüsselt (encrypt) oder entschlüsselt (decrypt) Dateien.
+
+- Aufruf
+
+        my $r = crypt_file(
+                       file               => <Datei>,          # zu entschlüsselnde Datei bei crypt_mode = 'd'   (decrypt)
+                                                               # zu verschlüsselnde Datei bei crypt_mode = 'e'   (encrypt)
+                                                               
+                       # key , hmac_key und iv müssen bei entschlüsselung mit denen der Verschlüsselung übereinstimmen                                             
+                       key                => <Schlüssel für Entschlüsselung>,
+                       hmac_key           => <checkwert mit integrität und authentizität>,
+                       iv                 => <initialisierungs-Vektor>,           # muss mit dem zur Verschlüsselung übereinstimmen ???
+                       
+                       cipher             => <Verschlüsselungsmethode z.B. AES>,
+                       only_return_string => 1,
+                       crypt_mode         => 'd'
+         
+                 ) ;
+
+    Aufruf der Funktion crypt\_file mit den folgenden Parametern:
+    Obligatorische Parameter:
+    \- crypt\_mode : 'd' oder 'e' für Decyrption oder Encryption
+    \- file: Datei die verschlüsselt werden soll
+    \- key: Schlüssel für symetrischen Cipher
+    \- iv: Initialiesierungvektor
+
+- Parameter
+
+- par1
+- par2
+- Rückgabe
+
+# AUTHOR
+
+Florian Scherzberg <onefloid@gmx.de>
+
+# COPYRIGHT AND LICENSE
+
+This software is Copyright (c) 2018 by Florian Scherzberg.
+
+This is free software, licensed under:
+
+    The Artistic License 2.0 (GPL Compatible)
