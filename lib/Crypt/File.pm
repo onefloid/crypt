@@ -1,4 +1,7 @@
 package Crypt::File;
+
+# ABSTRACT: provide functions for symmetric decryption and encryption of file
+
 use strict;
 use warnings;
 use v5.10;
@@ -15,6 +18,8 @@ our @EXPORT_OK = qw(crypt_file get_encrypted_file_content);
 
 use Carp;
 use Data::Dumper;
+
+our $VERSION = 1.01;
 
 =encoding utf8
 
