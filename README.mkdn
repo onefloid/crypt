@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/onefloid/crypt.svg?branch=master)](https://travis-ci.org/onefloid/crypt)
+[![Kwalitee status](http://cpants.cpanauthors.org/dist/Crypt-File.png)](http://cpants.charsbar.org/dist/overview/Crypt-File)
+[![GitHub issues](https://img.shields.io/github/issues/onefloid/crypt.svg)](https://github.com/onefloid/crypt/issues)
+
 # NAME
 
 Crypt::File - provide functions for symmetric decryption and encryption of file
@@ -95,6 +99,52 @@ Optionale Parameter:
 - par1
 - par2
 - Rückgabe
+
+
+
+# Development
+
+The distribution is contained in a Git repository, so simply clone the
+repository
+
+```
+$ git clone git://github.com/onefloid/crypt.git
+```
+
+and change into the newly-created directory.
+
+```
+$ cd Crypt-File
+```
+
+The project uses [`Dist::Zilla`](https://metacpan.org/pod/Dist::Zilla) to
+build the distribution, hence this will need to be installed before
+continuing:
+
+```
+$ cpanm Dist::Zilla
+```
+
+To install the required prequisite packages, run the following set of
+commands:
+
+```
+$ dzil authordeps --missing | cpanm
+$ dzil listdeps --author --missing | cpanm
+```
+
+The distribution can be tested like so:
+
+```
+$ dzil test
+```
+
+To run the full set of tests (including author and release-process tests),
+add the `--author` and `--release` options:
+
+```
+$ dzil test --author --release
+```
 
 # AUTHOR
 
