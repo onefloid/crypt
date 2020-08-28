@@ -4,7 +4,7 @@
 
 # NAME
 
-Crypt::File - provide functions for symmetric decryption and encryption of file
+Crypt::File - provide functions for symmetric encryption and decryption of files
 
 # VERSION
 
